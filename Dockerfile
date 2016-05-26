@@ -11,22 +11,12 @@ RUN \
     curl -sS https://getcomposer.org/installer | php && \
     mv composer.phar /usr/local/bin/composer && \
     chmod a+x /usr/local/bin/composer && \
-    cd / && \
     rm -rf /tmp/composer && \
-<<<<<<< HEAD
+    apt-get remove -y supervisor && \
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/* && \
     chmod 755 -R /hooks && \
     mkdir --mode 777 /var/www /usr/local/composer && \
-=======
-    composer global require drush/drush:8.* && \
-    export PATH="$HOME/.composer/vendor/bin:$HOME/.composer/vendor/drush/drush:$PATH" && \
-    apt-get autoremove -y && \
-    rm -rf /var/lib/apt/lists/* && \
-    mkdir --mode 777 /var/www && \
-    mkdir --mode=0700 /var/run/sshd && \
-    /usr/bin/ssh-keygen -A && /usr/sbin/sshd -D
->>>>>>> 29f2d5126f5d8f302cf92ab56b87a5608a5df68c
     
  WORKDIR /var/www
  
