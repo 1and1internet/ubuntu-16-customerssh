@@ -21,5 +21,3 @@ RUN \
     
  WORKDIR /home
  
- CMD ["/sbin/init"]
- 
