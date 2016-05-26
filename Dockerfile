@@ -13,13 +13,10 @@ RUN \
     chmod a+x /usr/local/bin/composer && \
     cd / && \
     rm -rf /tmp/composer && \
-    composer global require drush/drush:8.* && \
-    export PATH="$HOME/.composer/vendor/bin:$HOME/.composer/vendor/drush/drush:$PATH" && \
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/* && \
-    mkdir --mode 777 /var/www && \
-    mkdir --mode=0700 /var/run/sshd && \
-    /usr/bin/ssh-keygen -A && /usr/sbin/sshd -D
+    chmod 755 -R /hooks && \
+    mkdir --mode 777 /var/www /usr/local/composer && \
     
  WORKDIR /var/www
  

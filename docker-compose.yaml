@@ -3,5 +3,7 @@ services:
   docker:
     hostname: customer_ssh
     build: .
-    image: docker-ubuntu-16-customerssh
-    user: "100000"
+    image: ubuntu-16-customerssh
+    # user: "100000"
+    environment:
+    - "SUPERVISORD_LOGLEVEL=debug"
