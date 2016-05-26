@@ -1,6 +1,13 @@
+<<<<<<< HEAD
 #!/bin/bash
 set -e
 
 export COMPOSER_HOME=/usr/local/composer
 /usr/local/bin/composer global require drush/drush:8.*
 export PATH="/usr/local/composer/vendor/bin:/usr/local/composer/vendor/drush/drush:$PATH"
+=======
+!#/bin/bash
+set -e
+
+export PATH="$HOME/.composer/vendor/bin:$HOME/.composer/vendor/drush/drush:$PATH"
+>>>>>>> 29f2d5126f5d8f302cf92ab56b87a5608a5df68c
