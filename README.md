@@ -1,1 +1,1 @@
-# docker-ubuntu-16-customerssh
+# ubuntu-16-customerssh

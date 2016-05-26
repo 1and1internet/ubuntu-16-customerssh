@@ -12,11 +12,11 @@ RUN \
     mv composer.phar /usr/local/bin/composer && \
     chmod a+x /usr/local/bin/composer && \
     rm -rf /tmp/composer && \
-    apt-get remove -y supervisor && \
+    # apt-get remove -y supervisor && \
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/* && \
     chmod 755 -R /hooks && \
-    mkdir --mode 777 /var/www /usr/local/composer && \
+    mkdir --mode 777 /var/www /usr/local/composer
     
  WORKDIR /var/www
  

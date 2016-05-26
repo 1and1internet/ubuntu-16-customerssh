@@ -4,6 +4,6 @@ services:
     hostname: customer_ssh
     build: .
     image: ubuntu-16-customerssh
-    user: "100000"
+    # user: "100000"
     environment:
     - "SUPERVISORD_LOGLEVEL=debug"
