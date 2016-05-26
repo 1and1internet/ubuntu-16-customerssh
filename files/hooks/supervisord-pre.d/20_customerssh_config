@@ -1,0 +1,4 @@
+!#/bin/bash
+set -e
+
+export PATH="$HOME/.composer/vendor/bin:$HOME/.composer/vendor/drush/drush:$PATH"
