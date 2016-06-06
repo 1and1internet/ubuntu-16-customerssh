@@ -15,8 +15,4 @@ RSpec.configure do |c|
   set :docker_image, @image.id
 #  set :docker_container_create_options, { 'User' => '100000', 'Hostname' => 'ubuntu_16', 'Env' => [ 'SUPERVISORD_EXIT_ON_FATAL=0' ] }
   set :docker_container_create_options, { 'User' => '100000' }
-
-  describe "tests" do
-    include_examples 'docker-ubuntu-16'
-  end
 end
