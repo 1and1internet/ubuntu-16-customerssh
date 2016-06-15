@@ -12,7 +12,6 @@ RUN \
     php7.0-cli php7.0-fpm php7.0-common php7.0-curl php7.0-gd php7.0-mysql php7.0-sqlite3 php7.0-xml php7.0-zip php7.0-gettext php7.0-mbstring mysql-client perl ruby rake \
     git vim traceroute telnet nano dnsutils curl wget iputils-ping openssh-client && \
   apt-get remove -y python-software-properties software-properties-common && \
-  apt-get purge -y supervisor && \
   apt-get autoremove -y && apt-get autoclean -y && \
   mkdir /tmp/composer/ && \
   cd /tmp/composer && \
@@ -20,9 +19,9 @@ RUN \
   mv composer.phar /usr/local/bin/composer && \
   chmod a+x /usr/local/bin/composer && \
   rm -rf /tmp/composer && \
-  rm /init/supervisord /etc/supervisor/exit_on_fatal.py && \
   rm -rf /var/lib/apt/lists/* && \
   chmod 755 -R /hooks /init && \
+  chmod 777 /etc/passwd && \
   mkdir --mode 777 /var/www /usr/local/composer
 
 ENV COMPOSER_HOME=/var/www
