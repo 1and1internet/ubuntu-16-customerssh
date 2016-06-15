@@ -6,3 +6,4 @@ export mUID=`id -u`
 export mGID=`id -g`
 export LINE="ssh-user:x:$mUID:$mGID::/var/www/html:/bin/bash"
 echo >>/etc/passwd $LINE
+echo "ssh-user:x:${mGID}" >> /etc/group
