@@ -22,7 +22,8 @@ RUN \
   rm -rf /var/lib/apt/lists/* && \
   chmod 755 -R /hooks /init && \
   chmod 777 /etc/passwd && \
-  mkdir --mode 777 /var/www /usr/local/composer
+  mkdir --mode 777 /var/www /usr/local/composer && \
+  COMPOSER_HOME=/usr/local/composer /usr/local/bin/composer global require drush/drush:8.*
 
 ENV COMPOSER_HOME=/var/www
 
