@@ -7,3 +7,4 @@ services:
     user: "100000"
     environment:
     - "SUPERVISORD_LOGLEVEL=debug"
+    - "WORKDIR=/var/www"

@@ -1,9 +1,15 @@
 #!/bin/bash
 set -e
 
-export PATH="/usr/local/composer/vendor/bin:/usr/local/composer/vendor/drush/drush:$PATH"
 export mUID=`id -u`
 export mGID=`id -g`
-export LINE="ssh-user:x:$mUID:$mGID::/var/www/html:/bin/bash"
+export LINE="ssh-user:x:$mUID:$mGID::/var/www:/bin/bash"
 echo >>/etc/passwd $LINE
 echo "ssh-user:x:${mGID}" >> /etc/group
+
+if [ ! -f "${WORKDIR}/.bashrc" ]; then
+  cat << 'EOF' > ${WORKDIR}/.bashrc
+  export PATH="/usr/local/composer/vendor/bin:/usr/local/composer/vendor/drush/drush:$PATH"
+  export PS1='\u:\w\$ '
+EOF
+fi
