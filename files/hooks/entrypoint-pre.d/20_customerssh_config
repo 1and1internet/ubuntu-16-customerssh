@@ -11,5 +11,6 @@ if [ ! -f "${WORKDIR}/.bashrc" ]; then
   cat << 'EOF' > ${WORKDIR}/.bashrc
   export PATH="/usr/local/composer/vendor/bin:/usr/local/composer/vendor/drush/drush:$PATH"
   export PS1='\u:\w\$ '
+  export TERM=xterm-256color
 EOF
 fi
