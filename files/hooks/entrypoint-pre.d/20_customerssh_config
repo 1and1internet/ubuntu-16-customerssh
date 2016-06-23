@@ -2,7 +2,8 @@
 set -e
 
 export mUID=`id -u`
-export mGID=`id -g`
+#export mGID=`id -g`
+export mGID=`groups`
 export LINE="ssh-user:x:$mUID:$mGID::/var/www:/bin/bash"
 echo >>/etc/passwd $LINE
 echo "ssh-user:x:${mGID}" >> /etc/group
