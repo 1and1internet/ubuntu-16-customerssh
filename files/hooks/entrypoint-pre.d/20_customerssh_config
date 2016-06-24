@@ -3,9 +3,18 @@ set -e
 
 export mUID=`id -u`
 #export mGID=`id -g`
-export mGID=`groups`
-export LINE="ssh-user:x:$mUID:$mGID::/var/www:/bin/bash"
-echo >>/etc/passwd $LINE
+#export mGID=`groups`
+
+for gr in `id -G`; do
+  [ "$gr" == "0" ] && continue
+  getent group $gr
+  if [ "$?" != "0" ]; then
+    echo "ssh-group:x:${gr}" >> /etc/group
+    export mGID=$gr
+  fi
+done
+
+echo "ssh-user:x:${mUID}:${mGID}::/var/www:/bin/bash" >> /etc/passwd
 echo "ssh-user:x:${mGID}" >> /etc/group
 
 [ -z $WORKDIR ] && exit 0
