@@ -25,6 +25,7 @@ RUN \
   mkdir --mode 0777 /var/www /usr/local/composer && \
   COMPOSER_HOME=/usr/local/composer /usr/local/bin/composer global require drush/drush:8.*
 
-ENV COMPOSER_HOME=/var/www
+ENV COMPOSER_HOME=/var/www \
+    HOME=/var/www
 
 WORKDIR /var/www

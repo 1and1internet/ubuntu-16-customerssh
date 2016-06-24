@@ -1,21 +1,26 @@
 #!/bin/bash
-set -e
 
 export mUID=`id -u`
 #export mGID=`id -g`
 #export mGID=`groups`
 
 for gr in `id -G`; do
-  [ "$gr" == "0" ] && continue
-  getent group $gr
+  [ "${gr}" -eq "0" ] && echo "skipping group ${gr}" && continue
+  getent group ${gr} >/dev/null 2>&1
   if [ "$?" != "0" ]; then
-    echo "ssh-group:x:${gr}" >> /etc/group
     export mGID=$gr
+    if ! grep ^ssh-group /etc/group >/dev/null 2>&1; then
+      echo "ssh-group:x:${gr}:" >> /etc/group
+    fi
   fi
 done
 
-echo "ssh-user:x:${mUID}:${mGID}::/var/www:/bin/bash" >> /etc/passwd
-echo "ssh-user:x:${mGID}" >> /etc/group
+if ! grep ^ssh-user /etc/passwd >/dev/null 2>&1; then
+  sed -e "/^${mUID}:.*/d" /etc/passwd > /tmp/new_passwd
+  cat /tmp/new_passwd > /etc/passwd
+  rm -f /tmp/new_passwd
+  echo "ssh-user:x:${mUID}:${mGID}::/var/www:/bin/bash" >> /etc/passwd
+fi
 
 [ -z $WORKDIR ] && exit 0
 if [ ! -f "${WORKDIR}/.bashrc" ]; then
@@ -25,3 +30,4 @@ if [ ! -f "${WORKDIR}/.bashrc" ]; then
   export TERM=xterm-256color
 EOF
 fi
+
