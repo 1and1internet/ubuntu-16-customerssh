@@ -13,13 +13,14 @@ build:
     commands:
       - python3 -u /scripts/images/build.py
   spectests:
-    image: 1and1internet/ubuntu-16-rspec:latest
+    image: 1and1internet/ubuntu-16-rspec
     pull: true
+    privileged: true
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     commands:
       - export IMAGE=dronebuild$DRONE_BUILD_NUMBER/${CI_REPO#*/}
-      - mkdir ../drone-tests ; git clone https://github.com/1and1internet/drone-tests.git ../drone-tests
+      - mkdir ../drone-tests; git clone https://github.com/1and1internet/drone-tests.git ../drone-tests
       - rspec -f documentation spec/spec_helper.rb
   publish:
     when:
