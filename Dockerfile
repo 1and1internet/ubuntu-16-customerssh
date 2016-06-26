@@ -14,6 +14,7 @@ RUN \
   apt-get remove -y python-software-properties software-properties-common supervisor && \
   apt-get autoremove -y && apt-get autoclean -y && \
   mkdir /tmp/composer/ && \
+  mkdir --mode 0777 /data && \
   cd /tmp/composer && \
   curl -sS https://getcomposer.org/installer | php && \
   mv composer.phar /usr/local/bin/composer && \
