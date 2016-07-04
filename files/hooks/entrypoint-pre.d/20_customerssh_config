@@ -1,8 +1,6 @@
 #!/bin/bash
 
 export mUID=`id -u`
-#export mGID=`id -g`
-#export mGID=`groups`
 
 for gr in `id -G`; do
   [ "${gr}" -eq "0" ] && echo "skipping group ${gr}" && continue
