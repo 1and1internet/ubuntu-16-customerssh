@@ -23,7 +23,7 @@ RUN \
   chmod 0755 /usr/local/bin/composer && \
   chmod 0755 -R /hooks /init && \
   chmod 0777 /etc/passwd /etc/group && \
-  mkdir --mode 0777 /var/www /usr/local/composer && \
+  mkdir --mode 0777 /usr/local/composer && \
   COMPOSER_HOME=/usr/local/composer /usr/local/bin/composer global require drush/drush:8.*
 
 ENV COMPOSER_HOME=/data \
