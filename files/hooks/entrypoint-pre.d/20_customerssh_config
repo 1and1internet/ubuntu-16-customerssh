@@ -17,7 +17,12 @@ if ! grep ^ssh-user /etc/passwd >/dev/null 2>&1; then
   sed -e "/^${mUID}:.*/d" /etc/passwd > /tmp/new_passwd
   cat /tmp/new_passwd > /etc/passwd
   rm -f /tmp/new_passwd
-  echo "ssh-user:x:${mUID}:${mGID}::/data:/bin/bash" >> /etc/passwd
+  if [[ -z $HOME ]]; then
+    echo "ssh-user:x:${mUID}:${mGID}::/:/bin/bash" >> /etc/passwd
+  else
+    echo "ssh-user:x:${mUID}:${mGID}::${HOME}:/bin/bash" >> /etc/passwd
+  fi
+
 fi
 
 [ -z $HOME ] && exit 0
@@ -28,4 +33,3 @@ if [ ! -f "${HOME}/.bashrc" ]; then
   export TERM=xterm-256color
 EOF
 fi
-
