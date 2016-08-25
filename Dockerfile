@@ -13,6 +13,7 @@ RUN \
     git vim traceroute telnet nano dnsutils curl wget iputils-ping openssh-client openssh-sftp-server && \
   apt-get remove -y python-software-properties software-properties-common supervisor && \
   apt-get autoremove -y && apt-get autoclean -y && \
+  chmod 0777 /var/www && \
   mkdir /tmp/composer/ && \
   cd /tmp/composer && \
   curl -sS https://getcomposer.org/installer | php && \
@@ -26,6 +27,6 @@ RUN \
   COMPOSER_HOME=/usr/local/composer /usr/local/bin/composer global require drush/drush:8.*
 
 ENV COMPOSER_HOME=/var/www \
-    HOME=/
+    HOME=/var/www
 
 WORKDIR /var/www

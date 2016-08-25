@@ -17,8 +17,8 @@ if ! grep ^ssh-user /etc/passwd >/dev/null 2>&1; then
   sed -e "/^${mUID}:.*/d" /etc/passwd > /tmp/new_passwd
   cat /tmp/new_passwd > /etc/passwd
   rm -f /tmp/new_passwd
-  if [[ -z $HOME ]]; then
-    echo "ssh-user:x:${mUID}:${mGID}::/:/bin/bash" >> /etc/passwd
+  if [ -z $HOME ]; then
+    echo "ssh-user:x:${mUID}:${mGID}::/var/www:/bin/bash" >> /etc/passwd
   else
     echo "ssh-user:x:${mUID}:${mGID}::${HOME}:/bin/bash" >> /etc/passwd
   fi
