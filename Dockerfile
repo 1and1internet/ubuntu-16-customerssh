@@ -14,7 +14,6 @@ RUN \
   apt-get remove -y python-software-properties software-properties-common supervisor && \
   apt-get autoremove -y && apt-get autoclean -y && \
   mkdir /tmp/composer/ && \
-  mkdir --mode 0777 /data && \
   cd /tmp/composer && \
   curl -sS https://getcomposer.org/installer | php && \
   mv composer.phar /usr/local/bin/composer && \
@@ -26,7 +25,7 @@ RUN \
   mkdir --mode 0777 /usr/local/composer && \
   COMPOSER_HOME=/usr/local/composer /usr/local/bin/composer global require drush/drush:8.*
 
-ENV COMPOSER_HOME=/data \
-    HOME=/data
+ENV COMPOSER_HOME=/var/www \
+    HOME=/
 
-WORKDIR /data
+WORKDIR /var/www
