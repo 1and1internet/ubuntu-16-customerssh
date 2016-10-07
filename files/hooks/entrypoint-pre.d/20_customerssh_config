@@ -27,8 +27,10 @@ fi
 
 [ -z $HOME ] && exit 0
 if [ ! -f "${HOME}/.bashrc" ]; then
+  GEM_HOME=/var/www/._gems
+  VENV=/var/www/._venv
   cat << 'EOF' > ${HOME}/.bashrc
-  export PATH="/usr/local/composer/vendor/bin:/usr/local/composer/vendor/drush/drush:$PATH"
+  export PATH="${VENV}/bin:/usr/local/composer/vendor/bin:/usr/local/composer/vendor/drush/drush:$PATH:${GEM_HOME}/bin"
   export PS1='\u:\w\$ '
   export TERM=xterm-256color
 EOF
