@@ -31,5 +31,6 @@ if [ ! -f "${HOME}/.bashrc" ]; then
   export PATH="/var/www/._venv/bin:/usr/local/composer/vendor/bin:/usr/local/composer/vendor/drush/drush:$PATH:/var/www/._gems/bin"
   export PS1='\u:\w\$ '
   export TERM=xterm-256color
+  export GEM_HOME=/var/www/._gems
 EOF
 fi
