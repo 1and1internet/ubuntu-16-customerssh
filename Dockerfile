@@ -12,7 +12,15 @@ RUN \
     php7.0-cli php7.0-fpm php7.0-common php7.0-curl php7.0-gd php7.0-mysql php7.0-sqlite3 php7.0-xml php7.0-zip php7.0-gettext php7.0-mbstring mysql-client perl ruby rake \
     git vim traceroute telnet nano dnsutils curl wget iputils-ping openssh-client openssh-sftp-server \
     virtualenv python3-venv python3-virtualenv python3-all python3-setuptools python3-pip python-dev python3-dev python-pip \
-    gnupg build-essential ruby2.3-dev libsqlite3-dev nodejs && \
+    gnupg build-essential ruby2.3-dev libsqlite3-dev && \
+    apt-get install -y curl apt-transport-https ca-certificates lsb-release && \
+    DISTRO=$(lsb_release -c -s) && \
+    NODEREPO="node_6.x" && \
+    curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add - && \
+    echo "deb https://deb.nodesource.com/${NODEREPO} ${DISTRO} main" > /etc/apt/sources.list.d/nodesource.list && \
+    echo "deb-src https://deb.nodesource.com/${NODEREPO} ${DISTRO} main" >> /etc/apt/sources.list.d/nodesource.list && \
+    apt-get update -q && \
+    apt-get install -y build-essential nodejs && \
   apt-get remove -y python-software-properties software-properties-common supervisor && \
   apt-get autoremove -y && apt-get autoclean -y && \
   chmod 0777 /var/www && \
