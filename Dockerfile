@@ -34,9 +34,11 @@ RUN \
   chmod 0755 -R /hooks /init && \
   chmod 0777 /etc/passwd /etc/group && \
   mkdir --mode 0777 /usr/local/composer && \
-  COMPOSER_HOME=/usr/local/composer /usr/local/bin/composer global require drush/drush:8.*
+  COMPOSER_HOME=/usr/local/composer /usr/local/bin/composer global require drush/drush:8.* && \
+  mv /usr/bin/cpan /usr/bin/cpan_disabled && \
+  mv /usr/bin/cpan_override /usr/bin/cpan
 
 ENV COMPOSER_HOME=/var/www \
-    HOME=/var/www 
+    HOME=/var/www
 
 WORKDIR /var/www
