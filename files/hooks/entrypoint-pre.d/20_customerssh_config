@@ -29,7 +29,7 @@ fi
 if [ ! -f "${HOME}/.bashrc" ]; then
   cat << 'EOF' > ${HOME}/.bashrc
   export PATH="/var/www/._venv/bin:/usr/local/composer/vendor/bin:/usr/local/composer/vendor/drush/drush:$PATH:/var/www/._gems/bin"
-  export PS1="[\u:\[\e[36m\]\w\[\e[m\]]# "
+  export PS1="[\u:\[\e[36m\]\w\[\e[m\]]$ "
   export TERM=xterm-256color
   export GEM_HOME=/var/www/._gems
 
