@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# An inline replace using sed would require reducing restrictions on /etc further. This gets round the problem
+# by writing to a file in /tmp and then over-writing the result into the logrotate.
+sed "s|<CRON_LOG>|$CRON_LOG_FILE|" /etc/logrotate.conf > /tmp/lr && cat /tmp/lr > /etc/logrotate.conf
+
+# This will daemonize itself
+cron
