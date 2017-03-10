@@ -611,6 +611,7 @@ edit_cmd() {
 "# \n"
 "# For more information see the manual pages of crontab(5) and cron(8)\n" 
 "# \n"
+"MAILTO=\"\"\n"
 "# m h  dom mon dow   command\n" );
 	}
 

@@ -46,9 +46,10 @@ WORKDIR /var/www
 # Install and configure the cron service
 ENV EDITOR=/usr/bin/vim \
 	CRON_LOG_FILE=/var/spool/cron/cron.log \
-	CRON_LOCK_FILE=/var/spool/cron/cron.lock
+	CRON_LOCK_FILE=/var/spool/cron/cron.lock \
+	CRON_ARGS="-l 15 -f"
 RUN \
-  apt-get update && apt-get install -y -o Dpkg::Options::="--force-confold" logrotate && \
+  apt-get update && apt-get install -y -o Dpkg::Options::="--force-confold" logrotate man && \
   cd /src/cron-3.0pl1 && \
   make install && \
   mkdir -p /var/spool/cron/crontabs && \

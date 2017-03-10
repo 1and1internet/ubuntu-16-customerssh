@@ -42,7 +42,7 @@
 			 * (hint: MAILTO= was added for this reason).
 			 */
 
-//#define MAILCMD _PATH_SENDMAIL					/*-*/
+#define MAILCMD _PATH_SENDMAIL					/*-*/
 /* #define MAILARGS "%s -i -FCronDaemon -odi -oem  %s"		/*-*/
 #define MAILARGS "%s -i -FCronDaemon -B8BITMIME -oem  %s"		/*-*/
 			/* -i    = don't terminate on "." by itself
@@ -91,6 +91,5 @@
 			 */
 /*#define SYSLOG	 			/*-*/
 #define LOG_FILE "cron.log"
-#define MAILCMD "no_mta"
 #define LOCK_FILE "cron.lock"
 

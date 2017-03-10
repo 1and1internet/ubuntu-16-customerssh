@@ -4,5 +4,8 @@
 # by writing to a file in /tmp and then over-writing the result into the logrotate.
 sed "s|<CRON_LOG>|$CRON_LOG_FILE|" /etc/logrotate.conf > /tmp/lr && cat /tmp/lr > /etc/logrotate.conf
 
-# This will daemonize itself
-cron
+# Make sure the crontabs folder exists on the share
+[ -d /var/spool/cron/crontabs ] || mkdir -p /var/spool/cron/crontabs
+
+# This will daemonize itself unless -f is passed
+cron $CRON_ARGS
