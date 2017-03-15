@@ -47,7 +47,7 @@ WORKDIR /var/www
 ENV EDITOR=/usr/bin/vim \
 	CRON_LOG_FILE=/var/spool/cron/cron.log \
 	CRON_LOCK_FILE=/var/spool/cron/cron.lock \
-	CRON_ARGS="-l 15 -f"
+	CRON_ARGS=""
 RUN \
   apt-get update && apt-get install -y -o Dpkg::Options::="--force-confold" logrotate man && \
   cd /src/cron-3.0pl1 && \
