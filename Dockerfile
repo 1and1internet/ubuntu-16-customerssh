@@ -36,9 +36,30 @@ RUN \
   mkdir --mode 0777 /usr/local/composer && \
   COMPOSER_HOME=/usr/local/composer /usr/local/bin/composer global require drush/drush:8.* && \
   mv /usr/bin/cpan /usr/bin/cpan_disabled && \
-  mv /usr/bin/cpan_override /usr/bin/cpan
+  mv /usr/bin/cpan_override /usr/bin/cpan && \
+  rm -f /etc/ssh/ssh_host_*
 
 ENV COMPOSER_HOME=/var/www \
     HOME=/var/www
 
 WORKDIR /var/www
+
+# Install and configure the cron service
+ENV EDITOR=/usr/bin/vim \
+	CRON_LOG_FILE=/var/spool/cron/cron.log \
+	CRON_LOCK_FILE=/var/spool/cron/cron.lock \
+	CRON_ARGS=""
+RUN \
+  apt-get update && apt-get install -y -o Dpkg::Options::="--force-confold" logrotate man && \
+  cd /src/cron-3.0pl1 && \
+  make install && \
+  mkdir -p /var/spool/cron/crontabs && \
+  chmod -R 777 /var/spool/cron && \
+  cp debian/crontab.main /etc/crontab && \
+  cd - && \
+  rm -rf /src && \
+  find /etc/cron.* -type f | egrep -v 'logrotate|placeholder' | xargs -i rm -f {} && \
+  chmod 666 /etc/logrotate.conf && \
+  chmod -R 777 /var/lib/logrotate && \
+  rm -rf /var/lib/apt/lists/*
+  
