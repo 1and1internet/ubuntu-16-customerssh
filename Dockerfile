@@ -60,5 +60,6 @@ RUN \
   rm -rf /src && \
   find /etc/cron.* -type f | egrep -v 'logrotate|placeholder' | xargs -i rm -f {} && \
   chmod 666 /etc/logrotate.conf && \
-  chmod -R 777 /var/lib/logrotate
+  chmod -R 777 /var/lib/logrotate && \
+  rm -rf /var/lib/apt/lists/*
   
