@@ -35,6 +35,7 @@ RUN \
   chmod 0777 /etc/passwd /etc/group && \
   mkdir --mode 0777 /usr/local/composer && \
   COMPOSER_HOME=/usr/local/composer /usr/local/bin/composer global require drush/drush:8.* && \
+  COMPOSER_HOME=/usr/local/composer /usr/local/bin/composer global clearcache && \
   mv /usr/bin/cpan /usr/bin/cpan_disabled && \
   mv /usr/bin/cpan_override /usr/bin/cpan && \
   rm -f /etc/ssh/ssh_host_*
