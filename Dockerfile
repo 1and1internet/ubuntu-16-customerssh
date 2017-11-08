@@ -43,7 +43,8 @@ RUN \
   COMPOSER_HOME=/usr/local/composer /usr/local/bin/composer --no-ansi --no-interaction global clearcache && \
   mv /usr/bin/cpan /usr/bin/cpan_disabled && \
   mv /usr/bin/cpan_override /usr/bin/cpan && \
-  rm -f /etc/ssh/ssh_host_*
+  rm -f /etc/ssh/ssh_host_* && \
+  chmod -R 0777 /etc/supervisor/conf.d
 
 ENV COMPOSER_HOME=/var/www \
     HOME=/var/www
@@ -68,4 +69,3 @@ RUN \
   chmod 666 /etc/logrotate.conf && \
   chmod -R 777 /var/lib/logrotate && \
   rm -rf /var/lib/apt/lists/*
-
