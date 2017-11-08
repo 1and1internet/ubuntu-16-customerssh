@@ -26,14 +26,14 @@ RUN \
   echo "deb-src https://deb.nodesource.com/${NODEREPO} ${DISTRO} main" >> /etc/apt/sources.list.d/nodesource.list && \
   apt-get update -q && \
   apt-get install -y build-essential nodejs && \
-  apt-get remove -y python-software-properties software-properties-common supervisor && \
+  apt-get remove -y python-software-properties software-properties-common && \
   apt-get autoremove -y && apt-get autoclean -y && \
   chmod 0777 /var/www && \
   mkdir /tmp/composer/ && \
   cd /tmp/composer && \
   curl -sS https://getcomposer.org/installer | php && \
   mv composer.phar /usr/local/bin/composer && \
-  rm -rf /tmp/composer /etc/supervisor /init/supervisord /hooks/supervisord-pre.d && \
+  rm -rf /tmp/composer && \
   rm -rf /var/lib/apt/lists/* && \
   chmod 0755 /usr/local/bin/composer && \
   chmod 0755 -R /hooks /init && \
@@ -68,4 +68,4 @@ RUN \
   chmod 666 /etc/logrotate.conf && \
   chmod -R 777 /var/lib/logrotate && \
   rm -rf /var/lib/apt/lists/*
-  
+

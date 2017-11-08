@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 
-bash /init/entrypoint run
-exec sleep infinity
+echo "REMINDER: Stop calling run_forever.sh please."
+
+bash /init/entrypoint /init/supervisord
