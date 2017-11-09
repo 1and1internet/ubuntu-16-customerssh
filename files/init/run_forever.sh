@@ -2,4 +2,4 @@
 
 echo "REMINDER: Stop calling run_forever.sh please."
 
-exec /init/supervisord
+exec /init/entrypoint /init/supervisord
