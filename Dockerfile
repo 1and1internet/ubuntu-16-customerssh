@@ -1,7 +1,15 @@
 FROM 1and1internet/ubuntu-16:latest
-MAINTAINER mark.hawkins@fasthosts.com
+MAINTAINER brian.wilkinson@1and1.co.uk
 ARG DEBIAN_FRONTEND=noninteractive
 COPY files /
+
+# Mongodb client + tools
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 \
+            --recv 2930ADAE8CAF5059EE73BB4B58712A2291FA4AD5 && \
+    apt-get update && \
+    apt-get install -y mongodb-org-shell mongodb-org-tools && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN \
   apt-get update && \
