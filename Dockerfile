@@ -1,3 +1,8 @@
+FROM alpine as ioncube_loader
+RUN apk add git \
+	&& git -c http.sslVerify=false clone https://git.dev.glo.gb/cloudhostingpublic/ioncube_loader \
+	&& tar zxf ioncube_loader/ioncube_loaders_lin_x86-64.tar.gz
+
 FROM 1and1internet/ubuntu-16:latest
 MAINTAINER brian.wilkinson@1and1.co.uk
 ARG DEBIAN_FRONTEND=noninteractive
@@ -16,6 +21,8 @@ RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-k
     apt-get install -y postgresql-client-10 && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+COPY --from=ioncube_loader /ioncube/ioncube_loader_lin_7.2.so /usr/lib/php/20170718/
 
 RUN \
   apt-get update && \
@@ -44,11 +51,6 @@ RUN \
   apt-get remove -y python-software-properties software-properties-common && \
   apt-get autoremove -y && apt-get autoclean -y && \
   chmod 0777 /var/www && \
-  mkdir -p /usr/src/tmp/ioncube && \
-  curl -fSL "http://downloads.ioncube.com/loader_downloads/ioncube_loaders_lin_x86-64.tar.gz" -o /usr/src/tmp/ioncube_loaders_lin_x86-64.tar.gz && \
-  tar xfz /usr/src/tmp/ioncube_loaders_lin_x86-64.tar.gz -C /usr/src/tmp/ioncube && \
-  cp /usr/src/tmp/ioncube/ioncube/ioncube_loader_lin_7.2.so /usr/lib/php/20170718/ && \
-  rm -rf /usr/src/tmp/ && \
   mkdir /tmp/composer/ && \
   cd /tmp/composer && \
   curl -sS https://getcomposer.org/installer | php && \
